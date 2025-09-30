@@ -8,14 +8,23 @@ const checkLogin = () => {
   isLoading.value = true;
   browser.cookies.get({ url: 'https://x.com', name: 'auth_token' }, (cookie) => {
     console.log(cookie);
-    setTimeout(() => {
-      if (cookie) {
-        isLogin.value = true;
-      } else {
+    
+    if (cookie) {
+      // Check if cookie exists and is not expired
+      const currentTime = Date.now() / 1000; // Convert to seconds
+      console.log('Current time:', currentTime);
+      const isExpired = cookie.expirationDate && cookie.expirationDate < currentTime;
+      
+      if (isExpired) {
+        console.log('Cookie exists but is expired');
         isLogin.value = false;
+      } else {
+        isLogin.value = true;
       }
-      isLoading.value = false;
-    }, 300);
+    } else {
+      isLogin.value = false;
+    }
+    isLoading.value = false;
   });
 };
 
