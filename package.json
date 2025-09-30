@@ -1,6 +1,6 @@
 {
-  "name": "wxt-vue-starter",
-  "description": "manifest.json description",
+  "name": "检测x的登录状态",
+  "description": "检测x的登录状态",
   "private": true,
   "version": "0.0.0",
   "type": "module",
